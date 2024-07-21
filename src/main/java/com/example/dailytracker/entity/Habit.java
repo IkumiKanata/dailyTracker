@@ -1,5 +1,6 @@
 package com.example.dailytracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -15,8 +16,9 @@ public class Habit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int habitId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @Column(nullable = false, length = 255)

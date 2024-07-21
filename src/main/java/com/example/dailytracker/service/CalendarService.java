@@ -11,18 +11,18 @@ import java.util.List;
 @Service
 public class CalendarService {
 
-    private final UserRepository userRepository;
     private final HabitRepository habitRepository;
-    private final HabitCompletionRepository habitCompletionRepository;
 
     public CalendarService(UserRepository userRepository, HabitRepository habitRepository, HabitCompletionRepository habitCompletionRepository) {
-        this.userRepository = userRepository;
         this.habitRepository = habitRepository;
-        this.habitCompletionRepository = habitCompletionRepository;
     }
 
     public List<Habit> getCalendars(int userId) {
         return habitRepository.findAllByUserUserId(userId);
+    }
+
+    public List<Habit> getAllCalendars() {
+        return habitRepository.findAll();
     }
 
 }

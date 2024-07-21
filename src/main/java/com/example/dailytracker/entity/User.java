@@ -24,7 +24,7 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Habit> habits;
 
     // Getters and Setters

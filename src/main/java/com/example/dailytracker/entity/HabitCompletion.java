@@ -1,5 +1,6 @@
 package com.example.dailytracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -15,12 +16,14 @@ public class HabitCompletion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int completionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "habit_id", nullable = false)
+    @JsonIgnore
     private Habit habit;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @Column(nullable = false)
