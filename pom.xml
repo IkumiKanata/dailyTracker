@@ -79,8 +79,8 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
-<!--    needed below to execute flyway with mysql: reference
-    https://medium.com/@yohanesdwikiwitman/spring-boot-3-template-part-3-migrations-using-flyway-b1a85003019f-->
+        <!--    needed below to execute flyway with mysql: reference
+            https://medium.com/@yohanesdwikiwitman/spring-boot-3-template-part-3-migrations-using-flyway-b1a85003019f-->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-mysql</artifactId>
@@ -103,6 +103,17 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>10.10.0</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3366/daily_tracker</url>
+                    <user>user</user>
+                    <password>password</password>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
