@@ -15,11 +15,11 @@ public class HabitCompletion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int completionId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "habit_id", nullable = false)
     private Habit habit;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

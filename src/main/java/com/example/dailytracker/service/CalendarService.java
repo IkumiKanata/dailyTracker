@@ -22,9 +22,7 @@ public class CalendarService {
     }
 
     public List<Habit> getCalendars(int userId) {
-        var user = userRepository.findById(userId).orElseThrow();
-
-        return habitRepository.findAllByUser(user);
+        return habitRepository.findAllByUserUserId(userId);
     }
 
 }

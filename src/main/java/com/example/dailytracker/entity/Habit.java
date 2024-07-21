@@ -15,7 +15,7 @@ public class Habit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int habitId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -25,6 +25,6 @@ public class Habit {
     @Column(nullable = false, length = 50)
     private String frequency;
 
-    @OneToMany(mappedBy = "habit", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "habit", cascade = {CascadeType.REMOVE, CascadeType.DETACH}, orphanRemoval = true)
     private List<HabitCompletion> completions;
 }
