@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HabitCompletionRepository extends JpaRepository<HabitCompletion,Integer> {
+    void deleteAllByHabitHabitId(int habitId);
 }

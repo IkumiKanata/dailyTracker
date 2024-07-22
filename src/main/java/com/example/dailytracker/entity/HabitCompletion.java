@@ -26,7 +26,7 @@ public class HabitCompletion {
     @JsonIgnore
     private User user;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.DATE)
     private Date dateCompleted;
 }

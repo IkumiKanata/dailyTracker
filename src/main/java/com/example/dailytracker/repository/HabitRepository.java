@@ -10,4 +10,5 @@ import java.util.List;
 public interface HabitRepository extends JpaRepository<Habit,Integer> {
     List<Habit> findAllByUserUserId(int userId);
 
+    void deleteAllByUserUserId(int userId);
 }
