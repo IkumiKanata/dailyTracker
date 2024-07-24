@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class HabitService {
@@ -25,8 +28,10 @@ public class HabitService {
         this.userRepository = userRepository;
     }
 
-    public List<Habit> getUserHabits(int userId) {
-        return habitRepository.findAllByUserUserId(userId);
+    public Map<Integer, Habit> getUserHabits(int userId) {
+        var habits = habitRepository.findAllByUserUserId(userId);
+        return habits.stream().collect(Collectors.toMap(Habit::getHabitId, Function.identity()));
+
     }
 
     public List<Habit> getAllHabits() {
@@ -34,7 +39,7 @@ public class HabitService {
     }
 
     public void deleteHabit(int habitId) {
-       habitRepository.deleteById(habitId);
+        habitRepository.deleteById(habitId);
     }
 
 
