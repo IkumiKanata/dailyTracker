@@ -1,14 +1,14 @@
 package com.example.dailytracker.repository;
 
 import com.example.dailytracker.entity.Habit;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface HabitRepository extends JpaRepository<Habit,Integer> {
-    List<Habit> findAllByUserUserId(int userId);
+public interface HabitRepository extends JpaRepository<Habit, Integer> {
+    Page<Habit> findAllByUserUserId(int userId, Pageable pageable);
 
     void deleteAllByUserUserId(int userId);
 }

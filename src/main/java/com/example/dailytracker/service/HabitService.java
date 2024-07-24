@@ -5,14 +5,13 @@ import com.example.dailytracker.entity.HabitCompletion;
 import com.example.dailytracker.repository.HabitCompletionRepository;
 import com.example.dailytracker.repository.HabitRepository;
 import com.example.dailytracker.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 public class HabitService {
@@ -28,10 +27,8 @@ public class HabitService {
         this.userRepository = userRepository;
     }
 
-    public Map<Integer, Habit> getUserHabits(int userId) {
-        var habits = habitRepository.findAllByUserUserId(userId);
-        return habits.stream().collect(Collectors.toMap(Habit::getHabitId, Function.identity()));
-
+    public Page<Habit> getUserHabits(int userId, Pageable pageable) {
+        return habitRepository.findAllByUserUserId(userId, pageable);
     }
 
     public List<Habit> getAllHabits() {
@@ -53,7 +50,7 @@ public class HabitService {
         habitRepository.save(habit);
     }
 
-    public List<Habit> markHabitComplete(Integer userId, Integer habitId) {
+    public void markHabitComplete(Integer userId, Integer habitId) {
         var user = userRepository.findById(userId).orElseThrow();
         var habit = habitRepository.findById(habitId).orElseThrow();
         HabitCompletion habitCompletion = new HabitCompletion();
@@ -61,6 +58,5 @@ public class HabitService {
         habitCompletion.setHabit(habit);
         habitCompletion.setDateCompleted(new Date());
         habitCompletionRepository.save(habitCompletion);
-        return habitRepository.findAllByUserUserId(habit.getUser().getUserId());
     }
 }

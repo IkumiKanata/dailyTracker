@@ -4,10 +4,9 @@ import com.example.dailytracker.entity.Habit;
 import com.example.dailytracker.model.CreateHabitRequest;
 import com.example.dailytracker.model.HabitCompleteRequest;
 import com.example.dailytracker.service.HabitService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/habit")
@@ -20,16 +19,15 @@ public class HabitController {
     }
 
     @GetMapping
-    public Map<Integer, Habit> getHabits(
-            @RequestParam(value = "userId") Integer userId) {
-        return habitService.getUserHabits(userId);
+    public Page<Habit> getHabits(
+            @RequestParam(value = "userId") Integer userId, Pageable pageable) {
+        return habitService.getUserHabits(userId, pageable);
     }
 
     @PostMapping
-    public Map<Integer, Habit> createHabit(
+    public void createHabit(
             @RequestBody CreateHabitRequest request) {
         habitService.createHabit(request.getUserId(), request.getHabitName());
-        return habitService.getUserHabits(request.getUserId());
     }
 
     @DeleteMapping
@@ -39,9 +37,9 @@ public class HabitController {
     }
 
     @PostMapping("/complete")
-    public List<Habit> markHabitComplete(
+    public void markHabitComplete(
             @RequestBody HabitCompleteRequest request) {
-        return habitService.markHabitComplete(request.getUserId(), request.getHabitId());
+        habitService.markHabitComplete(request.getUserId(), request.getHabitId());
     }
 }
 
