@@ -11,7 +11,7 @@ import java.util.Date;
 public interface HabitCompletionRepository extends JpaRepository<HabitCompletion, Integer> {
     void deleteAllByHabitHabitId(int habitId);
 
-    void deleteByHabitHabitIdAndAndDateCompleted(int habitId, Date dateCompleted);
+    void deleteByHabitHabitIdAndDateCompleted(int habitId, Date dateCompleted);
 
     boolean existsByHabitHabitIdAndDateCompleted(Integer habitId, Date date);
 }

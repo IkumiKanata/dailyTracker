@@ -10,8 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
+import static java.sql.Date.valueOf;
 
 @Service
 public class HabitService {
@@ -35,6 +38,7 @@ public class HabitService {
         return habitRepository.findAll();
     }
 
+    @Transactional
     public void deleteHabit(int habitId) {
         habitRepository.deleteById(habitId);
     }
@@ -50,6 +54,7 @@ public class HabitService {
         habitRepository.save(habit);
     }
 
+    @Transactional
     public void markHabitComplete(Integer userId, Integer habitId) {
         var user = userRepository.findById(userId).orElseThrow();
         var habit = habitRepository.findById(habitId).orElseThrow();
@@ -62,10 +67,15 @@ public class HabitService {
         habitCompletionRepository.save(habitCompletion);
     }
 
+
+    @Transactional
+
     public void undoHabitComplete(Integer habitId) {
-        habitCompletionRepository.deleteByHabitHabitIdAndAndDateCompleted(habitId, new Date());
+        LocalDate today = LocalDate.now();  // システムデフォルトのタイムゾーンで今日の日付を取得
+        habitCompletionRepository.deleteByHabitHabitIdAndDateCompleted(habitId, valueOf(today));
     }
 
+    @Transactional
     public void updateHabitTitle(Integer habitId, String habitName) {
         var habit = habitRepository.findById(habitId).orElseThrow();
         habit.setHabitName(habitName);
