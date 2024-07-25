@@ -27,5 +27,4 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Habit> habits;
 
-    // Getters and Setters
 }

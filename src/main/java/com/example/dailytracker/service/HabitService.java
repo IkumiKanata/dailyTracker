@@ -57,7 +57,6 @@ public class HabitService {
             return;
         }
         HabitCompletion habitCompletion = new HabitCompletion();
-        habitCompletion.setUser(user);
         habitCompletion.setHabit(habit);
         habitCompletion.setDateCompleted(new Date());
         habitCompletionRepository.save(habitCompletion);

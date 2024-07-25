@@ -19,10 +19,8 @@ CREATE TABLE habit_completion
 (
     completion_id  INT AUTO_INCREMENT PRIMARY KEY,
     habit_id       INT  NOT NULL,
-    user_id        INT  NOT NULL,
     date_completed DATE NOT NULL,
     FOREIGN KEY (habit_id) REFERENCES habit (habit_id),
-    FOREIGN KEY (user_id) REFERENCES user (user_id),
     UNIQUE (habit_id, date_completed)
 );
 
