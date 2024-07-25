@@ -53,6 +53,9 @@ public class HabitService {
     public void markHabitComplete(Integer userId, Integer habitId) {
         var user = userRepository.findById(userId).orElseThrow();
         var habit = habitRepository.findById(habitId).orElseThrow();
+        if (habitCompletionRepository.existsByHabitHabitIdAndDateCompleted(habitId, new Date())) {
+            return;
+        }
         HabitCompletion habitCompletion = new HabitCompletion();
         habitCompletion.setUser(user);
         habitCompletion.setHabit(habit);
