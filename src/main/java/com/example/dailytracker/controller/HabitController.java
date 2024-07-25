@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/habit")
+@CrossOrigin
 public class HabitController {
 
     private final HabitService habitService;
