@@ -59,4 +59,14 @@ public class HabitService {
         habitCompletion.setDateCompleted(new Date());
         habitCompletionRepository.save(habitCompletion);
     }
+
+    public void undoHabitComplete(Integer habitId) {
+        habitCompletionRepository.deleteByHabitHabitIdAndAndDateCompleted(habitId, new Date());
+    }
+
+    public void updateHabitTitle(Integer habitId, String habitName) {
+        var habit = habitRepository.findById(habitId).orElseThrow();
+        habit.setHabitName(habitName);
+        habitRepository.save(habit);
+    }
 }

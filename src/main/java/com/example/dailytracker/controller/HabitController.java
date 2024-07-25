@@ -3,6 +3,7 @@ package com.example.dailytracker.controller;
 import com.example.dailytracker.entity.Habit;
 import com.example.dailytracker.model.CreateHabitRequest;
 import com.example.dailytracker.model.HabitCompleteRequest;
+import com.example.dailytracker.model.UpdateHabitTitleRequest;
 import com.example.dailytracker.service.HabitService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +42,18 @@ public class HabitController {
     public void markHabitComplete(
             @RequestBody HabitCompleteRequest request) {
         habitService.markHabitComplete(request.getUserId(), request.getHabitId());
+    }
+
+    @DeleteMapping("/complete")
+    public void undoHabitComplete(
+            @RequestParam(value = "habitId") Integer habitId) {
+        habitService.undoHabitComplete(habitId);
+    }
+
+    @PutMapping
+    public void updateHabitTitle(
+            @RequestBody UpdateHabitTitleRequest request) {
+        habitService.updateHabitTitle(request.getHabitId(), request.getHabitName());
     }
 }
 
