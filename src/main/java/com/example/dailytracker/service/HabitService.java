@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 import static java.sql.Date.valueOf;
 
@@ -32,10 +31,6 @@ public class HabitService {
 
     public Page<Habit> getUserHabits(int userId, Pageable pageable) {
         return habitRepository.findAllByUserUserId(userId, pageable);
-    }
-
-    public List<Habit> getAllHabits() {
-        return habitRepository.findAll();
     }
 
     @Transactional
