@@ -64,7 +64,6 @@ public class HabitService {
 
 
     @Transactional
-
     public void undoHabitComplete(Integer habitId) {
         LocalDate today = LocalDate.now();  // システムデフォルトのタイムゾーンで今日の日付を取得
         habitCompletionRepository.deleteByHabitHabitIdAndDateCompleted(habitId, valueOf(today));

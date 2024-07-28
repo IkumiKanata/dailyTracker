@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HabitRepository extends JpaRepository<Habit, Integer> {
     Page<Habit> findAllByUserUserId(int userId, Pageable pageable);
+
 }
