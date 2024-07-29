@@ -75,4 +75,11 @@ public class HabitService {
         habit.setHabitName(habitName);
         habitRepository.save(habit);
     }
+
+    @Transactional
+    public void updateHabitFrequency(Integer habitId, String frequency) {
+        var habit = habitRepository.findById(habitId).orElseThrow();
+        habit.setFrequency(frequency);
+        habitRepository.save(habit);
+    }
 }

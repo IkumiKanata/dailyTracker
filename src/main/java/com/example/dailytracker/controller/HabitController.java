@@ -55,6 +55,13 @@ public class HabitController {
             @RequestBody UpdateHabitTitleRequest request) {
         habitService.updateHabitTitle(request.getHabitId(), request.getHabitName());
     }
+
+    @PutMapping("/frequency")
+    public void updateHabitFrequency(
+            @RequestParam(value = "habitId") Integer habitId,
+            @RequestParam(value = "frequency") String frequency) {
+        habitService.updateHabitFrequency(habitId, frequency);
+    }
 }
 
 
