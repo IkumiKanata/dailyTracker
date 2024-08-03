@@ -22,8 +22,9 @@ public class SecurityConfiguration {
     }
 
 
+    //@Serviceで登録されている UserService を AuthenticationManager に登録
     @Bean
-    public AuthenticationManager authenticationManager(UserDetailsService detailsService, PasswordEncoder encoder) {
+    public AuthenticationManager authenticationManager(UserDetailsService detailsService) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(detailsService);
         return new ProviderManager(provider);
