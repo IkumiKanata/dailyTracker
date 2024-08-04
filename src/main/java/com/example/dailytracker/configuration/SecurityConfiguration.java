@@ -23,10 +23,13 @@ public class SecurityConfiguration {
 
 
     //@Serviceで登録されている UserService を AuthenticationManager に登録
+    // DaoAuthenticationProvider は、UserDetailsService と PasswordEncoder を使用して認証を行う
+    // DaoAuthenticationProvider は、 PasswordEncoder が明示的に設定されていない場合、DaoAuthenticationProvider はデフォルトの設定（もしあれば）を使用
     @Bean
     public AuthenticationManager authenticationManager(UserDetailsService detailsService) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(detailsService);
+        provider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(provider);
     }
 

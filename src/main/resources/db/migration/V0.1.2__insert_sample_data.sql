@@ -1,8 +1,8 @@
 -- ユーザーの追加
 INSERT INTO user (username, email, password)
-VALUES ('user1', 'user1@example.com', 'password123'),
-       ('user2', 'user2@example.com', 'password456'),
-       ('user3', 'user3@example.com', 'password789');
+VALUES ('user1', 'user1@example.com', '$2a$10$HAp5kLq0pn7DtQae2YxDae/5QQ1kW0a2DtJ4s.DSS35kXtbJ0gTxG'),
+       ('user2', 'user2@example.com', '$2a$10$HAp5kLq0pn7DtQae2YxDae/5QQ1kW0a2DtJ4s.DSS35kXtbJ0gTxG'),
+       ('user3', 'user3@example.com', '$2a$10$HAp5kLq0pn7DtQae2YxDae/5QQ1kW0a2DtJ4s.DSS35kXtbJ0gTxG');
 
 -- 習慣の追加
 INSERT INTO habit (user_id, habit_name, frequency)
