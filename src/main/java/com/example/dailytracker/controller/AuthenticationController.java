@@ -1,6 +1,8 @@
 package com.example.dailytracker.controller;
 
 import com.example.dailytracker.entity.User;
+import com.example.dailytracker.model.LoginUserRequest;
+import com.example.dailytracker.model.LoginUserResponse;
 import com.example.dailytracker.model.RegisterUserRequest;
 import com.example.dailytracker.service.AuthenticationService;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,10 @@ public class AuthenticationController {
     @PostMapping("/register")
     public User register(@RequestBody RegisterUserRequest request) {
         return authenticationService.registerUser(request.getUsername(), request.getEmail(), request.getPassword());
+    }
 
+    @PostMapping("/login")
+    public LoginUserResponse login(@RequestBody LoginUserRequest request) {
+        return authenticationService.loginUser(request.getUsername(), request.getPassword());
     }
 }
