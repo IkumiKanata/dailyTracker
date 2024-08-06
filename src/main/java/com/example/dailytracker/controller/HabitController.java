@@ -5,9 +5,13 @@ import com.example.dailytracker.model.CreateHabitRequest;
 import com.example.dailytracker.model.HabitCompleteRequest;
 import com.example.dailytracker.model.UpdateHabitTitleRequest;
 import com.example.dailytracker.service.HabitService;
+import com.example.dailytracker.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/habit")
@@ -16,15 +20,20 @@ public class HabitController {
 
     private final HabitService habitService;
 
-    public HabitController(HabitService habitService) {
+    private final UserService userService;
+
+    public HabitController(HabitService habitService, UserService userService) {
         this.habitService = habitService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public Page<Habit> getHabits(
-            @RequestParam(value = "userId") Integer userId, Pageable pageable) {
+    public Page<Habit> getHabits(Pageable pageable) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Integer userId = userService.extractUserIdFromAuthentication(authentication);
         return habitService.getUserHabits(userId, pageable);
     }
+
 
     @PostMapping
     public void createHabit(

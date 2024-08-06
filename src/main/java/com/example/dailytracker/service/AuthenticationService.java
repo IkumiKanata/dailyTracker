@@ -38,7 +38,7 @@ public class AuthenticationService {
     }
 
     public User registerUser(String username, String email, String password) {
-        var userRole = roleRepository.findByAuthority("ROLE_USER").get();
+        var userRole = roleRepository.findByAuthority("USER").get();
         Set<Role> authorities = new HashSet<>();
         authorities.add(userRole);
         User user = new User();
